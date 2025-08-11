@@ -102,10 +102,10 @@ The entire app is powered by Firebase Hosting and Firestore, with data being liv
 
 ## Screenshots
 
-![Screenshot1](screenshots/screenshot1.jpg)
-![Screenshot2](screenshots/screenshot2.jpg)
-![Screenshot3](screenshots/screenshot3.jpg)
-![Screenshot4](screenshots/screenshot4.jpg)
-![Screenshot5](screenshots/screenshot5.jpg)
-![Screenshot6](screenshots/screenshot6.jpg)
-![Screenshot7](screenshots/screenshot7.jpg)
+![Screenshot1](screenshots/screenshot1.png)
+![Screenshot2](screenshots/screenshot2.png)
+![Screenshot3](screenshots/screenshot3.png)
+![Screenshot4](screenshots/screenshot4.png)
+![Screenshot5](screenshots/screenshot5.png)
+![Screenshot6](screenshots/screenshot6.png)
+![Screenshot7](screenshots/screenshot7.png)
