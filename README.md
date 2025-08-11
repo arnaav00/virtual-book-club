@@ -2,7 +2,7 @@
 
 **The Wormhole** is an interactive, space-themed online book club platform designed for two main users with special privileges, and “hitchhiker” guests who can browse and engage in limited ways. It blends a thematic sci-fi aesthetic with dynamic Firestore integration for real-time updates, interactive book discussions, and guest reviews. This project was made as a present for my significant other.
 
-You can visit the website [here](https://bookworm-1c325.web.app/). Note that guests such as yourself must "Continue as a hitchhiker" instead.
+You can visit the website [here](https://bookworm-1c325.web.app/). Note that guests such as yourself must "Continue as a hitchhiker" for view and comment-only access.
 
 ---
 
@@ -18,7 +18,7 @@ The entire app is powered by Firebase Hosting and Firestore, with data being liv
 
 ### 1. Landing and Authentication
 - A **themed landing modal** greets visitors, locking the page until they:
-  - Enter the secret passphrase (becoming either *Arnaav* or *Devangshi*, depending on input).
+  - Enter the secret passphrase, assuming the role of either admin.
   - Or continue as a “Hitchhiker” for view-only access.
 - Background effects include an animated starfield pre-auth and a static cosmic background post-auth.
 - Background music toggle allows for an ambient audio experience.
