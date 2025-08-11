@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wormhole</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <link rel="icon" type="image/x-icon" href="favspace.ico">
+</head>
+<audio id="bg-music" autoplay loop>
+  <source src="theme.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+<body class="intro-lock">
+
+  <canvas id="starfield"></canvas>
+
+  <!-- Intro Landing Area -->
+  <div id="intro-screen" class="intro-screen">
+    <button id="open-entry" class="bn40">Enter the Wormhole</button>
+  </div>
+
+  <!-- Static Background Overlay -->
+  <div id="bg-overlay"></div>
+
+  <button id="toggle-music" class="bn40 music-toggle">🔊</button>
+
+  <!-- Title -->
+  <div class="site-title" style="display: none;">
+    <h1>The Wormhole</h1>
+  </div>  
+
+  <!-- Buttons -->
+  <div class="bn40div" id="action-buttons" style="display: none;">
+    <button id="change-role" class="bn40">Beam Me Up</button>
+    <button id="shelve-btn" class="bn40" style="display: none;">Shelve a Book</button>
+    <button id="about-us" class="bn40">About Us</button>
+    <button id="comms-module" class="bn40">Comms Module</button>
+  </div>
+
+  <!-- Book Posts -->
+  <main>
+    <section id="posts" class="post-container" aria-live="polite">
+      <!-- Book cards rendered dynamically -->
+    </section>
+  </main>
+
+<!-- Book Modal -->
+<div id="post-modal" class="modal">
+  <div class="modal-content book-modal">
+    <span id="modal-close" class="modal-close">&times;</span>
+
+    <!-- Title and Author -->
+    <h2 id="modal-title"></h2>
+    <div class="modal-author" id="modal-author"></div>
+
+    <!-- Image and Description side-by-side -->
+    <div class="modal-panels">
+      <div class="modal-left">  
+        <img id="modal-book-image" src="" alt="Book Cover" />
+      </div>
+      <div class="modal-right">
+        <p id="modal-description"></p>
+      </div>
+    </div>
+
+    <div id="rating-section" class="rating-section">
+      <div class="rating-block" id="arnaav-rating-block">
+        <div class="stars" data-user="arnaav"></div>
+        <div class="rating-name">Arnaav</div>
+      </div>
+      <div class="rating-block" id="devangshi-rating-block">
+        <div class="stars" data-user="devangshi"></div>
+        <div class="rating-name">Devangshi</div>
+      </div>
+    </div>    
+
+    <!-- Navigation and Answers -->
+    <div id="question-text"></div>
+    <div class="question-nav">
+      <button id="prev-question" class="chevron-arrow left"></button>
+      <div id="question-counter">1 / 5</div>
+      <button id="next-question" class="chevron-arrow right"></button>
+    </div>       
+    <div id="answers-section"></div>
+  </div>
+</div>
+
+
+
+  <!-- Page Entry Modal -->
+  <div id="entry-modal" class="modal">
+    <div class="modal-content entry">
+      <h2>Hello There!</h2>
+      <p>You appear to have stumbled upon a wormhole. Don't worry, you're fine.<br><br> Imagine if you will, a pocket of space where two cosmic entities discuss books from across the galaxy. And yes, it's bigger on the inside. Grab a Romulan Ale and join us to boldly go where no book club has gone before.<br><br</p>
+      <form id="entry-form">
+        <label for="entry-pass">What's the magic word?</label>
+        <input type="password" id="entry-pass" required />
+        <button type="submit">Allons-y!</button>
+        <button type="button" id="hitchhiker">Continue as a Hitchhiker</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Create Post Modal -->
+  <div id="create-post-modal" class="modal">
+    <div class="modal-content">
+      <span id="create-post-close" class="modal-close">&times;</span>
+      <form id="new-post-form">
+        <h2>Shelve A New Book</h2>
+        <input type="text" name="title" placeholder="Title" required />
+        <input type="text" name="author" placeholder="Author" required />
+        <input type="text" name="genres" placeholder="Genres (comma-separated)" required />
+        <input type="url" name="imageURL" placeholder="Image URL" required />
+        <textarea name="shortDescription" placeholder="Short Description" required></textarea>
+        <textarea name="questions" placeholder="Discussion Questions (one per line)" rows="8" required></textarea>
+        <div class="form-actions">
+          <button type="submit" class="submit-btn">Publish</button>
+          <button type="button" id="cancel-admin" class="cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<!-- About Us Modal -->
+<div id="about-modal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" id="about-close">&times;</span>
+    <h2 style="text-align: center;">About Us</h2>
+    <p style="text-align: center; margin-bottom: 2rem;">
+      We're just two bookish people who thought having a book club would be a nice way to talk about the novels we read together. But we also wanted to document these conversations somewhere. And thus, The Wormhole was born, connecting us while we're worlds apart. 
+    </p>
+
+    <div class="profile-section">
+      <div class="profile-block arnaav">
+        <img src="arnaav.png" alt="Arnaav" class="profile-img left" />
+        <div class="profile-text right-align-text">
+          <h3>Arnaav</h3>
+          <p> I'm into writing, films, boba, skipping leg day, and tinkering with code (like this website you're on). I used to read a lot and I'm slowly trying to get back into it. My favorite genres include comedy, sci-fi, and fantasy.<br><br><b>Star Sign</b>: Sagittarius<br><b>Preferred Fantasy Companion:</b> Whatever Mudkip is<br></p>
+        </div>
+      </div>
+    
+      <div class="profile-block devangshi">
+        <img src="devangshi.png" alt="Devangshi" class="profile-img right" />
+        <div class="profile-text">
+          <h3>Devangshi</h3>
+          <p>I'm into microwaves, poetry, a vast ocean of internet cat videos, and I crochet a lot of cool stuff. Outside of research papers, I'm an avid bookworm with a lot of books (mostly collecting dust) in my shelf. My favorite genres are sci-fi, fantasy, and pretty much everything fiction. <br><br><b>Star Sign:</b> Capricorn<br><b>Preferred Fantasy Companion:</b> A Friendly Dragon<br></p>
+        </div>
+      </div>
+
+      <h4 class="timer-heading">Together Since</h4>
+      <div id="timer" class="flip-timer">
+        <div class="flip-unit">
+          <div class="flip-number" id="years">00</div>
+          <div class="flip-label">Years</div>
+        </div>
+        <div class="flip-unit">
+          <div class="flip-number" id="months">00</div>
+          <div class="flip-label">Months</div>
+        </div>
+        <div class="flip-unit">
+          <div class="flip-number" id="days">00</div>
+          <div class="flip-label">Days</div>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+
+<!-- Hitchhiker Comment Modal -->
+<div id="comms-modal" class="modal">
+  <div class="modal-content entry">
+    <span id="comms-close" class="modal-close">&times;</span>
+    <h2>Initiate Comms</h2>
+    <p>Howdy, hitchhiker. Leave us a transmission to intercept!</p>
+    <form id="comment-form">
+      <label for="name">Your Name</label>
+      <input type="text" name="name" required />
+      <label for="comment">Message</label>
+      <textarea name="comment" rows="4" required></textarea>
+      <button id="transmit-btn" type="submit" class="transmit-btn">Transmit</button>
+      <button type="button" id="cancel-comment" class="cancel-btn">Abort</button>
+    </form>
+  </div>
+</div>
+
+<!-- Admin Comment View Modal -->
+<div id="intercepted-modal" class="modal">
+  <div class="modal-content entry">
+    <span id="intercepted-close" class="modal-close">&times;</span>
+    <h2>Intercepted Comms</h2>
+    <p class="modal-subtext">Here's what fellow spacebound travellers had to say.</p>
+    <div id="intercepted-list" class="comment-list"></div>
+  </div>
+</div>
+
+<div id="nyan-trigger" style="position: fixed; top: 450px; right: 175px; width: 20px; height: 100px; opacity: 0; z-index: 1000; cursor: pointer;"></div>
+<img id="nyan-cat" src="nyan-cat.gif" alt="Nyan Cat" style="display:none;" />
+<audio id="nyan-audio" src="nyancat.mp3" preload="auto"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
