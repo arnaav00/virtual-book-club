@@ -1,6 +1,6 @@
 // === Firebase Config ===
 const firebaseConfig = {
-  apiKey: "AIzaSyC4v1NXT7MPskIUU0egAnrrhtl9Fvs8808",
+  apiKey: "",
   authDomain: "bookworm-1c325.firebaseapp.com",
   projectId: "bookworm-1c325",
   storageBucket: "bookworm-1c325.appspot.com",
